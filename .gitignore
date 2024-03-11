@@ -1,0 +1,6 @@
+# Project exclude paths
+/lottery-common/target/
+/lottery-domain/target/
+/lottery-infrastructure/target/
+/lottery-interfaces/target/
+/lottery-rpc/target/
