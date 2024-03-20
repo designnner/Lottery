@@ -19,6 +19,8 @@ import java.util.Date;
 @ToString
 public class ActivityVO {
 
+    private Long id;
+
     /**
      * 活动ID
      */

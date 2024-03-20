@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wdx.lottery.infrastructure.mapper.UserTakeActivityMapper">
+
+    <resultMap id="BaseResultMap" type="cn.wdx.lottery.infrastructure.po.UserTakeActivity">
+            <result property="id" column="id" jdbcType="BIGINT"/>
+            <result property="uid" column="uId" jdbcType="VARCHAR"/>
+            <result property="takeid" column="takeId" jdbcType="BIGINT"/>
+            <result property="activityid" column="activityId" jdbcType="BIGINT"/>
+            <result property="activityname" column="activityName" jdbcType="VARCHAR"/>
+            <result property="takedate" column="takeDate" jdbcType="TIMESTAMP"/>
+            <result property="takecount" column="takeCount" jdbcType="INTEGER"/>
+            <result property="uuid" column="uuid" jdbcType="VARCHAR"/>
+            <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,uId,takeId,
+        activityId,activityName,takeDate,
+        takeCount,uuid,createTime,
+        updateTime
+    </sql>
+    
+    <update id="lockTackActivity" parameterType="cn.wdx.lottery.infrastructure.po.UserTakeActivity">
+        update user_take_activity
+        set state = 1
+        where uId = #{uid} and activityId = #{activityid} and state = 0
+    </update>
+    
+    <select id="queryNoConsumedTakeActivityOrder" parameterType="cn.wdx.lottery.infrastructure.po.UserTakeActivity" resultMap="BaseResultMap">
+        select activityId,takeId,strategyId,state
+        from user_take_activity
+        where uId = #{uid} and activityId = #{activityid} and state = 0
+        order by id desc
+        limit 1
+    </select>
+    
+</mapper>

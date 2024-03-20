@@ -1,9 +1,12 @@
 package cn.wdx.lottery.infrastructure.mapper;
 
-import cn.wdx.lottery.domain.activity.model.vo.AlterStateVO;
+
 import cn.wdx.lottery.infrastructure.po.Activity;
+import cn.wdx.lottery.infrastructure.po.AlterState;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author hi
@@ -17,7 +20,11 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 
     Activity queryActivityById(Long activityId);
 
-    int alterState(AlterStateVO alterStateVO);
+    int alterState(AlterState alterStateVO);
+
+    int subtractionActivityStock(Long activityId);
+
+    List<Activity> scanToDoActivityList(Long id);
 }
 
 

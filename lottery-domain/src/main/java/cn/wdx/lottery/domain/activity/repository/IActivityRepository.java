@@ -1,10 +1,8 @@
 package cn.wdx.lottery.domain.activity.repository;
 
 import cn.wdx.lottery.common.Constants;
-import cn.wdx.lottery.domain.activity.model.vo.ActivityVO;
-import cn.wdx.lottery.domain.activity.model.vo.AwardVO;
-import cn.wdx.lottery.domain.activity.model.vo.StrategyDetailVO;
-import cn.wdx.lottery.domain.activity.model.vo.StrategyVO;
+import cn.wdx.lottery.domain.activity.model.req.PartakeReq;
+import cn.wdx.lottery.domain.activity.model.vo.*;
 
 import java.util.List;
 
@@ -46,4 +44,9 @@ public interface IActivityRepository {
      */
     boolean alterStatus(Long activityId, Enum<Constants.ActivityState> beforeState, Enum<Constants.ActivityState> afterState);
 
+    ActivityBillVO queryActivityBill(PartakeReq partakeReq);
+
+    int subtractionActivityStock(Long activityId);
+
+    List<ActivityVO> scanToDoActivityList(Long id);
 }

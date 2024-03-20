@@ -17,6 +17,8 @@
             <result property="creator" column="creator" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="strategyId" column="strategy_id" jdbcType="BIGINT"/>
+            <result property="stockSurplusCount" column="stock_surplus_count" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -35,17 +37,30 @@
          #{stockCount},#{takeCount},#{state},#{creator},now(),now())
     </insert>
 
-    <select id="queryActivityById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="queryActivityById" parameterType="java.lang.Long" resultType="cn.wdx.lottery.infrastructure.po.Activity">
         select activity_id,activity_name,activity_desc,begin_date_time,end_date_time,
         stock_count,take_count,state,creator,create_time,update_time
         from activity
         where activity_id = #{activityId}
     </select>
 
-    <update id="alterState" parameterType="cn.wdx.lottery.domain.activity.model.vo.AlterStateVO">
+    <update id="alterState" parameterType="cn.wdx.lottery.infrastructure.po.AlterState">
         update activity
         set state = #{afterState}
         where activity_id = #{activityId}
         and state = #{beforeState}
     </update>
+
+    <update id="subtractionActivityStock" parameterType="java.lang.Long">
+        update activity set stock_surplus_count = stock_surplus_count - 1
+        where activity_id = #{activityId} and stock_surplus_count > 0
+    </update>
+
+    <select id="scanToDoActivityList" parameterType="java.lang.Long" resultType="cn.wdx.lottery.infrastructure.po.Activity">
+        select activity_id,activity_name,begin_date_time,end_date_time,state,creator
+        from activity
+        where id >= #{id} and state in (4,5)
+        order by id asc
+        limit 10
+    </select>
 </mapper>

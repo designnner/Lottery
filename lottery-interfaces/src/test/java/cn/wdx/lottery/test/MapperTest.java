@@ -1,14 +1,18 @@
 package cn.wdx.lottery.test;
 
+
 import cn.wdx.lottery.rpc.IActivityBooth;
 import cn.wdx.lottery.rpc.req.ActivityReq;
 import cn.wdx.lottery.rpc.res.ActivityRes;
+import cn.wdx.middleware.db.router.DBRouterConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 
 /**
  * @author: wdxxx
@@ -21,15 +25,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class MapperTest {
 
-    @Autowired
-    private IActivityBooth activityBooth;
 
     @Test
-    public void test() {
-        log.info("test");
-        ActivityReq activityReq = new ActivityReq();
-        activityReq.setActivityId(1L);
-        ActivityRes activityRes = activityBooth.queryActivityById(activityReq);
-        log.info("activityRes:{}", activityRes);
+    public void test() throws InterruptedException {
+        int i = 0;
+        while(true){
+            log.info(" ");
+            Thread.sleep(5000);
+        }
     }
 }

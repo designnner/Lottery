@@ -1,6 +1,9 @@
 package cn.wdx.lottery.domain.activity.service.deploy;
 
 import cn.wdx.lottery.domain.activity.model.req.ActivityConfigReq;
+import cn.wdx.lottery.domain.activity.model.vo.ActivityVO;
+
+import java.util.List;
 
 public interface IActivityDeploy {
     /**
@@ -16,5 +19,7 @@ public interface IActivityDeploy {
      * @param req 活动配置信息
      */
     void updateActivity(ActivityConfigReq req);
+
+    List<ActivityVO> scanToDoActivityList(Long id);
 
 }
